@@ -7,6 +7,7 @@ import org.springframework.amqp.core.Queue;
 
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -19,7 +20,7 @@ public class RabbitMQConfig implements BeanPostProcessor {
     /**
      * 这是创建交换机和队列用的rabbitAdmin对象
      */
-    @Resource
+    @Autowired
     private RabbitAdmin rabbitAdmin;
 
     /**
@@ -35,7 +36,7 @@ public class RabbitMQConfig implements BeanPostProcessor {
         rabbitAdmin.declareExchange(rabbitmqDirectExchange());
         //创建队列
         rabbitAdmin.declareQueue(rabbitmqDirectQueue());
-        return null;
+        return bean;
     }
 
     @Bean
